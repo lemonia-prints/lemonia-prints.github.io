@@ -121,20 +121,18 @@ p{margin:0}
 /* category cards */
 .cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .cat{position:relative;display:block;min-height:500px;border-radius:18px;overflow:hidden;text-decoration:none;color:#fff;background:var(--paper-2)}
-.cat .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
-.cat:hover .bg{transform:scale(1.06)}
+.cat .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0;transform:scale(1.04);transition:opacity 1.4s ease,transform 7s ease-out}
+.cat .bg.on{opacity:1;transform:scale(1.12)}
+.cat:hover .bg.on{transform:scale(1.16);transition:opacity 1.4s ease,transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.cat .dots{position:absolute;top:18px;right:20px;z-index:2;display:flex;gap:6px}
+.cat .dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45);transition:background .4s,transform .4s}
+.cat .dots i.on{background:#fff;transform:scale(1.25)}
 .cat::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,19,15,0) 45%,rgba(22,19,15,.82) 100%)}
 .cat .txt{position:absolute;left:26px;right:26px;bottom:24px;z-index:2;display:flex;justify-content:space-between;align-items:end;gap:14px}
 .cat h3{font-size:3rem;line-height:.95}
 .cat small{display:block;margin-top:8px;font-size:.95rem;color:#EFE7DA}
 .cat .go{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:2px solid #fff;font-size:1.3rem;flex:none;transition:background .25s,color .25s}
 .cat:hover .go{background:#fff;color:var(--navy)}
-.cat.light{color:var(--navy)}
-.cat.light::after{background:none}
-.cat.light .bg{object-fit:contain;padding:16% 16% 30%;mix-blend-mode:multiply}
-.cat.light small{color:var(--ink-2)}
-.cat.light .go{border-color:var(--navy)}
-.cat.light:hover .go{background:var(--navy);color:var(--paper)}
 
 /* themes: hover-reveal list */
 .tlist{border-top:2px solid var(--navy);position:relative}
@@ -400,6 +398,9 @@ const awn=(c='')=>`<div class="awning ${c}" aria-hidden="true"></div>`;
 const pick=ids=>ids.map(i=>D.paintings.find(p=>p.id===i)).filter(Boolean);
 
 /* ---------- HOME ---------- */
+const catImgs=k=>[1,2,3].map(i=>`<img class="bg${i===1?' on':''}" src="img/m/cat_${k}${i}.jpg" alt="" loading="lazy">`).join('')+`<span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>`;
+let catT;function catStart(){clearInterval(catT);const cs=[...document.querySelectorAll('.cat')];if(!cs.length||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let t=0;
+  catT=setInterval(()=>{if(!document.body.contains(cs[0]))return clearInterval(catT);const c=cs[t%cs.length];const ims=c.querySelectorAll('.bg'),ds=c.querySelectorAll('.dots i');let i=[...ims].findIndex(x=>x.classList.contains('on'));ims[i].classList.remove('on');ds[i].classList.remove('on');i=(i+1)%ims.length;ims[i].classList.add('on');ds[i].classList.add('on');t++},1600)}
 function home(){
   const nn=D.paintings.filter(p=>p.new);
   const colIds=['lemon','sea','cat','flower','food','animal','girl','land','style','abstract'];
@@ -421,9 +422,9 @@ function home(){
   <section class="sec"><div class="wrap">
     <div class="sec-head"><div><div class="eyebrow">Каталог</div><h2 style="margin-top:12px">Что вы ищете?</h2></div></div>
     <div class="cats">
-      <a class="cat" href="#paintings"><img class="bg" src="img/a/italiya-limony.jpg" alt=""><div class="txt"><div><h3>Картины</h3><small>${D.paintings.length} принтов · холст 30×40 и 40×60</small></div><span class="go">→</span></div></a>
-      <a class="cat" href="#walls"><img class="bg" src="${IM('img/w0.jpg')}" alt=""><div class="txt"><div><h3>Обои</h3><small>${D.walls.length} дизайнов · до 4 × 2,8 м</small></div><span class="go">→</span></div></a>
-      <a class="cat light" href="#pillows"><img class="bg" src="${IM('img/pl56.jpg')}" alt=""><div class="txt"><div><h3>Подушки</h3><small>${D.pillows.length} дизайнов · 40×40 см</small></div><span class="go">→</span></div></a>
+      <a class="cat" href="#paintings">${catImgs('art')}<div class="txt"><div><h3>Картины</h3><small>${D.paintings.length} принтов · холст 30×40 и 40×60</small></div><span class="go">→</span></div></a>
+      <a class="cat" href="#walls">${catImgs('wall')}<div class="txt"><div><h3>Обои</h3><small>${D.walls.length} дизайнов · до 4 × 2,8 м</small></div><span class="go">→</span></div></a>
+      <a class="cat" href="#pillows">${catImgs('pl')}<div class="txt"><div><h3>Подушки</h3><small>${D.pillows.length} дизайнов · 40×40 см</small></div><span class="go">→</span></div></a>
     </div>
   </div></section>
 
@@ -562,7 +563,7 @@ function route(keep){
     if(mb)mb.onclick=()=>{const y=scrollY;state.lim+=48;route(true);scrollTo(0,y)};
   }
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.r===navKey));
-  fanStart();
+  fanStart();catStart();
   window.scrollTo(0,0);
 }
 addEventListener('hashchange',route);
