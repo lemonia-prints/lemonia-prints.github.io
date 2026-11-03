@@ -270,12 +270,24 @@ p{margin:0}
 .note{font-size:.88rem;color:var(--ink-2)}
 
 /* about */
-.about-hero{background:#F5DEC4}
-.about-hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:56px;padding-block:72px;align-items:center}
-.about-hero h1{font-size:clamp(2.8rem,6vw,5rem);font-weight:600}
-.about-hero p{font-size:1.15rem;margin-top:22px;max-width:46ch}
-.about-hero .pic{position:relative}
-.about-hero .pic img{border:12px solid #fff;transform:rotate(3deg);box-shadow:0 30px 50px -26px rgba(15,26,74,.6)}
+.about-hero{background:var(--paper);position:relative;overflow:hidden}
+.about-hero::before{content:"";position:absolute;right:-12%;top:-30%;width:62%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(226,176,74,.22),rgba(226,176,74,0) 65%);pointer-events:none}
+.about-hero .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.85fr);gap:64px;padding-block:80px 72px;align-items:center}
+.about-hero h1{font-size:clamp(2.8rem,5.6vw,4.8rem);font-weight:600;line-height:1}
+.about-hero .lead{font-size:1.18rem;margin-top:24px;max-width:48ch;color:var(--navy)}
+.about-hero .lead+.lead{margin-top:14px;color:var(--ink-2);font-size:1.05rem}
+.about-stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.about-stats span{border:2px solid var(--navy);border-radius:999px;padding:10px 18px;font-size:.92rem;background:rgba(255,255,255,.35)}
+.about-stats b{font-family:var(--f-display);font-size:1.25rem;margin-right:6px;color:var(--coral-text)}
+.about-hero .pic{position:relative;justify-self:center;width:min(100%,440px)}
+.about-hero .pic .frame{position:relative;aspect-ratio:4/5;border-radius:999px 999px 18px 18px;overflow:hidden;box-shadow:0 34px 60px -30px rgba(22,19,15,.55)}
+.about-hero .pic .frame img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.about-hero .pic:hover .frame img{transform:scale(1.04)}
+.about-hero .pic::before{content:"";position:absolute;inset:-14px -14px 14px 14px;border:2px solid var(--lemon);border-radius:999px 999px 22px 22px;z-index:-1}
+.about-hero .pic .stamp{position:absolute;left:-26px;bottom:38px;background:var(--coral);color:var(--paper);border-radius:16px;padding:14px 18px;font-family:var(--f-display);font-size:1.15rem;line-height:1.15;box-shadow:0 16px 30px -16px rgba(22,19,15,.6);transform:rotate(-4deg)}
+.about-hero .pic .stamp small{display:block;font-family:var(--f-body,Jost),sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--lemon);margin-bottom:4px}
+.fact b{font-family:var(--f-display);font-size:1.6rem;font-weight:600}
+.fact .ic{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:var(--coral);color:var(--lemon);font-family:var(--f-display);font-size:1.25rem;font-weight:600;font-style:italic}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .fact{border:2px solid var(--navy);border-radius:24px;padding:26px;display:flex;flex-direction:column;gap:12px}
 .fact b{font-family:var(--f-display);font-size:1.7rem;font-weight:600}
@@ -325,6 +337,9 @@ main > *{animation:pagein .45s ease both}
   .thumbs{flex-direction:row;order:2}
   .thumbs button{width:72px}
   .filters{position:static}
+  .about-hero .wrap{padding-block:48px 56px;gap:44px}
+  .about-hero .pic{width:min(86%,380px)}
+  .about-hero .pic .stamp{left:-10px;bottom:24px}
   .chip{padding:6px 11px;font-size:.84rem}
   .chip small{display:none}
   .fan{height:300px}
@@ -485,13 +500,15 @@ function collections(){return `<section class="phead"><div class="wrap"><div><di
  <section class="sec"><div class="wrap">${themeList(Object.keys(TAGS))}</div></section>`}
 
 /* ---------- ABOUT ---------- */
-function about(){return `<section class="about-hero"><div class="wrap"><div><div class="eyebrow">Обо мне</div><h1 style="margin-top:14px">Я делаю принты, в&nbsp;которых всегда немного лета</h1>
- <p>Я дизайнер и художница. Пишу маслом и мастихином, с детства езжу в Грецию и привожу оттуда цвета: белые стены, синие ставни, лимоны в каждом дворе. Из этого и выросла λεμόνια.</p></div>
- <div class="pic"><img src="img/a/limonnoe-derevo.jpg" alt="Картина «Лимонное дерево»"></div></div></section>${awn('lemon')}
+function about(){return `<section class="about-hero"><div class="wrap"><div><div class="eyebrow">Обо мне</div><h1 style="margin-top:14px">Художница и дизайнер, <em>которая любит уют</em></h1>
+ <p class="lead">Я digital-художница и при этом пишу настоящие картины: маслом и мастихином, в студии и дома. Из живописи приходят цвет, фактура и настроение, а цифровые инструменты помогают довести каждую идею до принта, который хорошо смотрится на стене.</p>
+ <p class="lead">За плечами несколько лет в дизайне интерфейсов и продуктовом дизайне. Поэтому я думаю о картине как о вещи, которая будет жить в вашем доме: подходить по цвету, размеру и настроению, а не просто висеть.</p>
+ <div class="about-stats"><span><b>${D.paintings.length}</b>принтов</span><span><b>5+</b>лет в дизайне</span><span><b>∞</b>любви к лимонам</span></div></div>
+ <div class="pic"><div class="frame"><img src="img/about.jpg" alt="Автор принтов λεμόνια"></div><div class="stamp"><small>автор</small>λεμόνια</div></div></div></section>${awn('lemon')}
  <section class="sec"><div class="wrap"><div class="facts">
-  <div class="fact"><b>Холст и подрамник</b><p>Картины печатают на холсте и натягивают на деревянный подрамник, их можно сразу вешать.</p></div>
-  <div class="fact"><b>Ozon и Wildberries</b><p>Производство, доставку и возврат берёт на себя маркетплейс. Я придумываю дизайн.</p></div>
-  <div class="fact"><b>Сайт-каталог</b><p>Здесь собраны все мои принты в одном месте: выбирайте спокойно, а купить можно на Ozon или Wildberries.</p></div>
+  <div class="fact"><span class="ic" aria-hidden="true">01</span><b>Живопись и digital</b><p>Каждый принт начинается с идеи художника: композиции, палитры, настроения. Живые работы и цифровые соединяются в одну серию.</p></div>
+  <div class="fact"><span class="ic" aria-hidden="true">02</span><b>Взгляд дизайнера</b><p>Подбираю сюжеты и цвета так, чтобы картины легко вписывались в интерьер и хорошо смотрелись парами и тройками.</p></div>
+  <div class="fact"><span class="ic" aria-hidden="true">03</span><b>Холст и маркетплейсы</b><p>Картины печатают на холсте и натягивают на подрамник. Купить можно на Ozon или Wildberries, доставка и возврат через площадку.</p></div>
  </div></div></section>${buyBand()}`}
 
 /* ---------- PRODUCT ---------- */
