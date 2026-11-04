@@ -9,7 +9,7 @@
 <meta property="og:title" content="Оливковая ветвь на светлом фоне — картина на холсте | λεμόνια">
 <meta property="og:description" content="Картина «Оливковая ветвь на светлом фоне» на холсте с подрамником, 30×40, 40×60 см. Тема: цветы, еда. Купить на Ozon или Wildberries.">
 <meta property="og:type" content="product">
-<meta property="og:image" content="https://lemonia-prints.github.io/img/a/olivki-vetv-na-svetlom-fone.jpg">
+<meta property="og:image" content="https://lemonia-prints.github.io/img/g/olivkovaya-vetv-na-svetlom-fone-1.jpg">
 <meta property="og:url" content="https://lemonia-prints.github.io/kartiny/olivkovaya-vetv-na-svetlom-fone/">
 <link rel="canonical" href="https://lemonia-prints.github.io/kartiny/olivkovaya-vetv-na-svetlom-fone/">
 <meta name="theme-color" content="#16130F">
@@ -246,6 +246,19 @@ p{margin:0}
 .view.wall.mural{background:none}
 .view.wall.mural img.m{position:absolute;inset:0 0 17% 0;width:100%;height:83%;object-fit:cover}
 .view.wall.mural .sofa{position:absolute;left:22%;right:22%;bottom:14%;height:20%;background:#E9E2D2;border-radius:18px 18px 8px 8px;box-shadow:0 18px 26px -14px rgba(0,0,0,.45)}
+.stage.car{display:block;aspect-ratio:2/3;width:min(100%,calc((100vh - 150px)*2/3));margin-inline:auto}
+.stage.car.hz{aspect-ratio:3/2;width:100%}
+.track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.track::-webkit-scrollbar{display:none}
+.track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;display:block}
+.car .nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(251,247,240,.88);color:var(--navy);font-size:22px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18);z-index:2}
+.car .nav.prev{left:12px}.car .nav.next{right:12px}
+.car .nav:disabled{opacity:0;pointer-events:none}
+.car .dots{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:8px;z-index:2}
+.car .dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.6);box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.car .dots i.on{background:#fff;width:22px;border-radius:4px}
+.thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
+.thumbs.hz button{aspect-ratio:3/2}
 .vlabel{position:absolute;left:14px;top:14px;background:var(--paper);border:2px solid var(--navy);border-radius:999px;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;z-index:2}
 .info{display:flex;flex-direction:column;gap:22px;min-width:0}
 .info .tags{display:flex;flex-wrap:wrap;gap:8px}
@@ -392,7 +405,7 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1793776611"></script>
+<script src="data.js?v=1793778861"></script>
 <script src="pw.js?v=1793728232"></script>
 <script>
 const D=window.LEMONIA;const PW=window.PWIMG||{};const IM=p=>PW[p]||p;[...D.walls,...D.pillows].forEach(x=>x.img=IM(x.img));
@@ -521,12 +534,15 @@ function product(kind,x){
   const keys=Object.keys(x.s);let sz=keys.find(k=>x.s[k][0]||x.s[k][1])||keys[0];
   const base=kind==='art'?'paintings':kind==='wall'?'walls':'pillows';const title=kind==='art'?'Картины':kind==='wall'?'Обои':'Подушки';
   const t0=(x.t||[])[0];
+  const G=x.g?Array.from({length:x.g},(_,i)=>`img/g/${x.id}-${i+1}.jpg`):null;
   const views=kind==='art'?[['flat','Картина'],['wall','На стене'],['close','Крупный план']]:kind==='wall'?[['mural','В комнате'],['close','Крупный план']]:[['pillow','Подушка'],['pfla','Принт']];
   const sim=(kind==='art'?D.paintings.filter(p=>p.id!==x.id&&p.t.includes(t0)):kind==='wall'?D.walls.filter(p=>p.id!==x.id):D.pillows.filter(p=>p.id!==x.id)).slice(0,4);
   const html=`<div class="wrap"><div class="crumbs dark"><a href="#home">Главная</a> / <a href="#${base}">${title}</a>${t0?` / <a href="#${base}-${t0}">${TAGS[t0]}</a>`:''} / ${esc(x.n)}</div>
   <div class="prod">
-    <div class="gal"><div class="thumbs" id="thumbs">${views.map(([v,l],i)=>`<button type="button" data-v="${i}" aria-label="${l}" aria-current="${i===0}"><div class="tv">${viewHTML(kind,x,v,true)}</div></button>`).join('')}</div>
-      <div class="stage" id="stage">${viewHTML(kind,x,views[0][0])}<span class="vlabel">${views[0][1]}</span></div></div>
+    ${G?`<div class="gal"><div class="thumbs${x.h?' hz':''}" id="thumbs">${G.map((g,i)=>`<button type="button" data-v="${i}" aria-label="Фото ${i+1}" aria-current="${i===0}"><img src="${g}" alt="" loading="lazy"></button>`).join('')}</div>
+      <div class="stage car${x.h?' hz':''}"><div class="track" id="track">${G.map((g,i)=>`<img src="${g}" alt="${esc(x.n)}${i?' в интерьере':' — картина на холсте'}" ${i?'loading="lazy"':''}>`).join('')}</div><button type="button" class="nav prev" aria-label="Назад" disabled>‹</button><button type="button" class="nav next" aria-label="Вперёд">›</button><div class="dots">${G.map((g,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div></div>`:
+    `<div class="gal"><div class="thumbs" id="thumbs">${views.map(([v,l],i)=>`<button type="button" data-v="${i}" aria-label="${l}" aria-current="${i===0}"><div class="tv">${viewHTML(kind,x,v,true)}</div></button>`).join('')}</div>
+      <div class="stage" id="stage">${viewHTML(kind,x,views[0][0])}<span class="vlabel">${views[0][1]}</span></div></div>`}
     <div class="info">
       ${x.t&&x.t.length?`<div class="tags">${x.t.map(t=>`<a href="#${base}-${t}">${TAGS[t]}</a>`).join('')}</div>`:''}
       <h1>${esc(x.n)}</h1>
@@ -556,6 +572,10 @@ function product(kind,x){
     if(kind==='art'){const art=document.querySelector('#stage .view.wall .art');if(art)art.style.setProperty('--aw',{'40×60':'44%','50×70':'50%','60×80':'56%'}[sz]||'32%')}};
   upd();
   document.getElementById('sizes').onclick=e=>{const b=e.target.closest('.size');if(b){sz=b.dataset.k;upd()}};
+  if(G){const tr=document.getElementById('track'),th=[...document.querySelectorAll('#thumbs button')],dots=[...document.querySelectorAll('.car .dots i')],pv=document.querySelector('.car .prev'),nx=document.querySelector('.car .next');
+    const go=i=>tr.scrollTo({left:i*tr.clientWidth,behavior:'smooth'});const cur=()=>Math.round(tr.scrollLeft/tr.clientWidth);
+    tr.addEventListener('scroll',()=>{const i=cur();th.forEach((b,j)=>b.setAttribute('aria-current',j===i));dots.forEach((d,j)=>d.classList.toggle('on',j===i));pv.disabled=i===0;nx.disabled=i===G.length-1},{passive:true});
+    th.forEach((b,j)=>b.onclick=()=>go(j));pv.onclick=()=>go(cur()-1);nx.onclick=()=>go(cur()+1);return}
   document.getElementById('thumbs').onclick=e=>{const b=e.target.closest('button');if(!b)return;const i=+b.dataset.v;
     document.querySelectorAll('#thumbs button').forEach(t=>t.setAttribute('aria-current',t===b));
     document.getElementById('stage').innerHTML=viewHTML(kind,x,views[i][0])+`<span class="vlabel">${views[i][1]}</span>`;upd()};
