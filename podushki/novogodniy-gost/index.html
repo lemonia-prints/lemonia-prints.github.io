@@ -9,7 +9,7 @@
 <meta property="og:title" content="Новогодний гость — декоративная подушка | λεμόνια">
 <meta property="og:description" content="Наволочка 40×40 см с принтом «Новогодний гость». Купить на Ozon или Wildberries.">
 <meta property="og:type" content="product">
-<meta property="og:image" content="https://lemonia-prints.github.io/img/pl53.jpg">
+<meta property="og:image" content="https://lemonia-prints.github.io/img/gp/novogodniy-gost-1.jpg">
 <meta property="og:url" content="https://lemonia-prints.github.io/podushki/novogodniy-gost/">
 <link rel="canonical" href="https://lemonia-prints.github.io/podushki/novogodniy-gost/">
 <meta name="theme-color" content="#16130F">
@@ -167,8 +167,8 @@ p{margin:0}
 .card .meta{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:.84rem;color:var(--ink-2)}
 .tagpill{position:absolute;left:12px;top:12px;background:var(--coral);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:999px}
 .card.wide .ph{aspect-ratio:3/2}
-.card.sq .ph{aspect-ratio:1/1;background:var(--paper-2)}
-.card.sq .ph img{object-fit:contain;padding:12%;mix-blend-mode:multiply}
+.card.sq .ph{aspect-ratio:4/5;background:var(--paper-2)}
+.card.sq .ph img{object-fit:cover;object-position:50% 52%}
 
 /* rail */
 .rail{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:16px;scrollbar-width:thin;scrollbar-color:var(--navy) transparent}
@@ -405,7 +405,7 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1793779024"></script>
+<script src="data.js?v=1793780824"></script>
 <script src="pw.js?v=1793728232"></script>
 <script>
 const D=window.LEMONIA;const PW=window.PWIMG||{};const IM=p=>PW[p]||p;[...D.walls,...D.pillows].forEach(x=>x.img=IM(x.img));
@@ -534,13 +534,13 @@ function product(kind,x){
   const keys=Object.keys(x.s);let sz=keys.find(k=>x.s[k][0]||x.s[k][1])||keys[0];
   const base=kind==='art'?'paintings':kind==='wall'?'walls':'pillows';const title=kind==='art'?'Картины':kind==='wall'?'Обои':'Подушки';
   const t0=(x.t||[])[0];
-  const G=x.g?Array.from({length:x.g},(_,i)=>`img/g/${x.id}-${i+1}.jpg`):null;
+  const G=x.g?Array.from({length:x.g},(_,i)=>`img/${kind==='pillow'?'gp':kind==='wall'?'gw':'g'}/${x.id}-${i+1}.jpg`):null;
   const views=kind==='art'?[['flat','Картина'],['wall','На стене'],['close','Крупный план']]:kind==='wall'?[['mural','В комнате'],['close','Крупный план']]:[['pillow','Подушка'],['pfla','Принт']];
   const sim=(kind==='art'?D.paintings.filter(p=>p.id!==x.id&&p.t.includes(t0)):kind==='wall'?D.walls.filter(p=>p.id!==x.id):D.pillows.filter(p=>p.id!==x.id)).slice(0,4);
   const html=`<div class="wrap"><div class="crumbs dark"><a href="#home">Главная</a> / <a href="#${base}">${title}</a>${t0?` / <a href="#${base}-${t0}">${TAGS[t0]}</a>`:''} / ${esc(x.n)}</div>
   <div class="prod">
     ${G?`<div class="gal"><div class="thumbs${x.h?' hz':''}" id="thumbs">${G.map((g,i)=>`<button type="button" data-v="${i}" aria-label="Фото ${i+1}" aria-current="${i===0}"><img src="${g}" alt="" loading="lazy"></button>`).join('')}</div>
-      <div class="stage car${x.h?' hz':''}"><div class="track" id="track">${G.map((g,i)=>`<img src="${g}" alt="${esc(x.n)}${i?' в интерьере':' — картина на холсте'}" ${i?'loading="lazy"':''}>`).join('')}</div><button type="button" class="nav prev" aria-label="Назад" disabled>‹</button><button type="button" class="nav next" aria-label="Вперёд">›</button><div class="dots">${G.map((g,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div></div>`:
+      <div class="stage car${x.h?' hz':''}"><div class="track" id="track">${G.map((g,i)=>`<img src="${g}" alt="${esc(x.n)}${i?' в интерьере':kind==='pillow'?' — подушка':' — картина на холсте'}" ${i?'loading="lazy"':''}>`).join('')}</div><button type="button" class="nav prev" aria-label="Назад" disabled>‹</button><button type="button" class="nav next" aria-label="Вперёд">›</button><div class="dots">${G.map((g,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div></div>`:
     `<div class="gal"><div class="thumbs" id="thumbs">${views.map(([v,l],i)=>`<button type="button" data-v="${i}" aria-label="${l}" aria-current="${i===0}"><div class="tv">${viewHTML(kind,x,v,true)}</div></button>`).join('')}</div>
       <div class="stage" id="stage">${viewHTML(kind,x,views[0][0])}<span class="vlabel">${views[0][1]}</span></div></div>`}
     <div class="info">
