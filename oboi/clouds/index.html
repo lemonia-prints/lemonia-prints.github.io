@@ -9,7 +9,7 @@
 <meta property="og:title" content="Облака на закате — фотообои | λεμόνια">
 <meta property="og:description" content="Фотообои «Облака на закате», высота 2,8 м. Купить на Ozon или Wildberries.">
 <meta property="og:type" content="product">
-<meta property="og:image" content="https://lemonia-prints.github.io/img/w12.jpg">
+<meta property="og:image" content="https://lemonia-prints.github.io/img/gw/clouds-1.jpg">
 <meta property="og:url" content="https://lemonia-prints.github.io/oboi/clouds/">
 <link rel="canonical" href="https://lemonia-prints.github.io/oboi/clouds/">
 <meta name="theme-color" content="#16130F">
@@ -405,7 +405,7 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1793780824"></script>
+<script src="data.js?v=1793781208"></script>
 <script src="pw.js?v=1793728232"></script>
 <script>
 const D=window.LEMONIA;const PW=window.PWIMG||{};const IM=p=>PW[p]||p;[...D.walls,...D.pillows].forEach(x=>x.img=IM(x.img));
@@ -540,7 +540,7 @@ function product(kind,x){
   const html=`<div class="wrap"><div class="crumbs dark"><a href="#home">Главная</a> / <a href="#${base}">${title}</a>${t0?` / <a href="#${base}-${t0}">${TAGS[t0]}</a>`:''} / ${esc(x.n)}</div>
   <div class="prod">
     ${G?`<div class="gal"><div class="thumbs${x.h?' hz':''}" id="thumbs">${G.map((g,i)=>`<button type="button" data-v="${i}" aria-label="Фото ${i+1}" aria-current="${i===0}"><img src="${g}" alt="" loading="lazy"></button>`).join('')}</div>
-      <div class="stage car${x.h?' hz':''}"><div class="track" id="track">${G.map((g,i)=>`<img src="${g}" alt="${esc(x.n)}${i?' в интерьере':kind==='pillow'?' — подушка':' — картина на холсте'}" ${i?'loading="lazy"':''}>`).join('')}</div><button type="button" class="nav prev" aria-label="Назад" disabled>‹</button><button type="button" class="nav next" aria-label="Вперёд">›</button><div class="dots">${G.map((g,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div></div>`:
+      <div class="stage car${x.h?' hz':''}"><div class="track" id="track">${G.map((g,i)=>`<img src="${g}" alt="${esc(x.n)}${i?' в интерьере':kind==='pillow'?' — подушка':kind==='wall'?' — фотообои':' — картина на холсте'}" ${i?'loading="lazy"':''}>`).join('')}</div><button type="button" class="nav prev" aria-label="Назад" disabled>‹</button><button type="button" class="nav next" aria-label="Вперёд">›</button><div class="dots">${G.map((g,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div></div>`:
     `<div class="gal"><div class="thumbs" id="thumbs">${views.map(([v,l],i)=>`<button type="button" data-v="${i}" aria-label="${l}" aria-current="${i===0}"><div class="tv">${viewHTML(kind,x,v,true)}</div></button>`).join('')}</div>
       <div class="stage" id="stage">${viewHTML(kind,x,views[0][0])}<span class="vlabel">${views[0][1]}</span></div></div>`}
     <div class="info">
