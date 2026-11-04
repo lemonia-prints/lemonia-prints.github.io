@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://lemonia-prints.github.io/sitemap.xml

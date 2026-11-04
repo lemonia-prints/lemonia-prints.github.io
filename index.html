@@ -8,7 +8,7 @@
 <meta property="og:title" content="λεμόνια — авторские принты для дома">
 <meta property="og:description" content="Картины на холсте, фотообои и подушки. Купить на Ozon и Wildberries.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="img/a/limonnoe-derevo.jpg">
+<meta property="og:image" content="https://lemonia-prints.github.io/img/a/limonnoe-derevo.jpg">
 <meta name="theme-color" content="#16130F">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316130F'/%3E%3Ctext x='29' y='47' font-family='Georgia,serif' font-size='44' fill='%23F4EFE6' text-anchor='middle'%3E%CE%BB%3C/text%3E%3Ccircle cx='47' cy='17' r='6' fill='%23E2B04A'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="fonts.css">
@@ -268,6 +268,7 @@ p{margin:0}
 .spec li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
 .spec li span:last-child{color:var(--ink-2);text-align:right;font-variant-numeric:tabular-nums}
 .note{font-size:.88rem;color:var(--ink-2)}
+.copylink{align-self:flex-start;background:none;border:0;padding:0;font:inherit;font-size:.9rem;color:var(--coral-text);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 
 /* about */
 .about-hero{background:var(--paper);position:relative;overflow:hidden}
@@ -388,7 +389,7 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1793728232"></script>
+<script src="data.js?v=1793776611"></script>
 <script src="pw.js?v=1793728232"></script>
 <script>
 const D=window.LEMONIA;const PW=window.PWIMG||{};const IM=p=>PW[p]||p;[...D.walls,...D.pillows].forEach(x=>x.img=IM(x.img));
@@ -401,7 +402,7 @@ const WB=id=>id?`https://www.wildberries.ru/catalog/${id}/detail.aspx`:null;
 const hasBuy=s=>Object.values(s).some(v=>v[0]||v[1]);
 const plural=(n,f)=>{const a=n%100,b=n%10;return a>10&&a<20?f[2]:b===1?f[0]:b>1&&b<5?f[1]:f[2]};
 const byId={};D.paintings.forEach(x=>byId['art-'+x.id]=['art',x]);D.walls.forEach(x=>byId['wall-'+x.id]=['wall',x]);D.pillows.forEach(x=>byId['pillow-'+x.id]=['pillow',x]);
-const app=document.getElementById('app');
+const app=document.getElementById('app');const TITLE0=document.title;
 
 /* ---------- pieces ---------- */
 const card=(kind,x)=>{const href=`#${kind}-${x.id}`;const soon=!hasBuy(x.s);
@@ -458,7 +459,7 @@ function home(){
 
   <section class="sec"><div class="wrap">
     <div class="sec-head"><div><div class="eyebrow">Тренд сезона</div><h2 style="margin-top:12px">Коты</h2></div><a class="more" href="#paintings-cat">Все коты</a></div>
-    <div class="grid">${pick(["kot-italiya", "kot-v-kostyume", "kot-i-mandariny", "kot-na-ryzhem", "kot-spit-na-zabore", "kotik-na-yuge", "kotik-tyanetsya", "chernyy-kot-i-limonad"]).map(x=>card('art',x)).join('')}</div>
+    <div class="grid">${pick(["kot-v-italii", "kot-v-kostyume", "kot-i-mandariny", "kot-na-ryzhem", "kot-spit-na-zabore", "kotik-na-yuge", "kotik-tyanetsya", "chernyy-kot-i-limonad"]).map(x=>card('art',x)).join('')}</div>
   </div></section>
 
   ${buyBand()}`;
@@ -530,11 +531,14 @@ function product(kind,x){
       <div><div class="lbl">${kind==='pillow'?'Вариант':'Размер'}</div><div class="sizes" id="sizes">${keys.map(k=>`<button type="button" class="size" data-k="${k}" aria-pressed="${k===sz}"><b>${k}${kind==='art'?' см':kind==='wall'?' м':''}</b><small>${kind==='art'?(k==='30×40'?'для пары или тройки':k==='40×60'?'одна над комодом':'большая, над диваном'):kind==='wall'?'ширина × высота':(k==='Подушка'?'с наполнителем':'только чехол')}</small></button>`).join('')}</div></div>
       <div id="buyBox"></div>
       <ul class="spec" id="spec"></ul>
+      <button type="button" class="copylink" id="copyLink">Скопировать ссылку на работу</button>
       <p class="note">Цену и срок доставки смотрите на маркетплейсе: они меняются каждый день и зависят от вашего города.</p>
     </div>
   </div></div>
   ${sim.length?`<section class="sec" style="padding-top:20px;border-top:2px solid var(--navy)"><div class="wrap"><div class="sec-head"><h2 style="font-size:clamp(1.6rem,3vw,2.4rem)">${kind==='art'?'Ещё из подборки «'+TAGS[t0]+'»':'Смотрите также'}</h2>${kind==='art'?`<a class="more" href="#${base}-${t0}">Вся подборка</a>`:''}</div><div class="grid">${sim.map(s=>card(kind,s)).join('')}</div></div></section>`:''}`;
   app.innerHTML=html;
+  {const pth=`/${PDIR[kind]}/${x.id}/`;if(location.pathname!==pth||location.hash)history.replaceState(null,'',pth);document.title=`${x.n} — λεμόνια`;
+   const cb=document.getElementById('copyLink');if(cb)cb.onclick=()=>{const u=location.origin+pth;(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{cb.textContent='Ссылка скопирована ✓';setTimeout(()=>cb.textContent='Скопировать ссылку на работу',2200)}).catch(()=>prompt('Ссылка на работу:',u))}}
   const upd=()=>{const [o,w]=x.s[sz];
     document.getElementById('buyBox').innerHTML=(o||w)?`<div class="lbl">Купить</div><div class="buy">${o?`<a class="mpbtn oz" href="${OZ(o)}" target="_blank" rel="noopener"><i></i>Ozon ↗</a>`:`<span class="mpbtn oz" aria-disabled="true"><i></i>Ozon скоро</span>`}${w?`<a class="mpbtn wb" href="${WB(w)}" target="_blank" rel="noopener"><i></i>Wildberries ↗</a>`:`<span class="mpbtn wb" aria-disabled="true"><i></i>Wildberries скоро</span>`}</div>`
       :`<div class="soon"><b>Скоро в продаже.</b> Эта работа совсем новая и появится на Ozon и Wildberries в ближайшее время.</div>`;
@@ -562,8 +566,10 @@ function viewHTML(kind,x,v,mini){const wc=WALLC[(x.t||[])[0]]||'#EDE3CC';
   return `<div class="view pfla"><img src="${x.img}" alt=""></div>`}
 
 /* ---------- router ---------- */
+const PDIR={art:'kartiny',wall:'oboi',pillow:'podushki'};
 function route(keep){
-  const h=(location.hash||'#home').slice(1);
+  const pm=location.pathname.match(/^\/(kartiny|oboi|podushki)\/([^/]+)\/?$/);const PK={kartiny:'art',oboi:'wall',podushki:'pillow'};
+  const h=location.hash?location.hash.slice(1):(pm?PK[pm[1]]+'-'+decodeURIComponent(pm[2]):'home');
   if(!keep)state.lim=48;
   document.getElementById('hdr').classList.remove('open');
   let navKey='';
@@ -576,6 +582,7 @@ function route(keep){
     else if(p==='collections'){app.innerHTML=collections();navKey='collections'}
     else if(p==='about'){app.innerHTML=about();navKey='about'}
     else app.innerHTML=home();
+    if(location.pathname!=='/'){history.replaceState(null,'','/'+(location.hash||''));document.title=TITLE0}
     const mb=document.getElementById('more');
     if(mb)mb.onclick=()=>{const y=scrollY;state.lim+=48;route(true);scrollTo(0,y)};
   }
@@ -583,7 +590,7 @@ function route(keep){
   fanStart();catStart();
   window.scrollTo(0,0);
 }
-addEventListener('hashchange',route);
+addEventListener('hashchange',()=>route());addEventListener('popstate',()=>route());
 const fl=document.createElement('div');fl.className='float';fl.setAttribute('aria-hidden','true');document.body.appendChild(fl);
 let flKey='';
 document.addEventListener('mousemove',e=>{const r=e.target.closest&&e.target.closest('.trow');
