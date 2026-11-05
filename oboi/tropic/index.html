@@ -9,7 +9,7 @@
 <meta property="og:title" content="Тропики — фотообои | λεμόνια">
 <meta property="og:description" content="Фотообои «Тропики», высота 2,8 м. Купить на Ozon или Wildberries.">
 <meta property="og:type" content="product">
-<meta property="og:image" content="https://lemonia-prints.github.io/img/gw/tropic-1.jpg">
+<meta property="og:image" content="https://lemonia-prints.github.io/img/gw/tropic-1.jpg?v=2">
 <meta property="og:url" content="https://lemonia-prints.github.io/oboi/tropic/">
 <link rel="canonical" href="https://lemonia-prints.github.io/oboi/tropic/">
 <meta name="theme-color" content="#16130F">
@@ -21,8 +21,8 @@
 /* Layout: a gallery at night. Dark hero with a moving wall of paintings, cream catalogue pages,
    pomegranate as the one accent, gold for small details. Classical serif headlines. One committed look. */
 :root{
-  --paper:#F4EFE6;
-  --paper-2:#E8E0D2;
+  --paper:#F1E6D4;
+  --paper-2:#E6D7C0;
   --cobalt:#16130F;      /* night: dark blocks */
   --cobalt-deep:#0B0907;
   --navy:#16130F;        /* ink */
@@ -405,7 +405,7 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1793871950"></script>
+<script src="data.js?v=1793883862"></script>
 <script src="pw.js?v=1793728232"></script>
 <script>
 const D=window.LEMONIA;const PW=window.PWIMG||{};const IM=p=>PW[p]||p;[...D.walls,...D.pillows].forEach(x=>x.img=IM(x.img));
@@ -431,7 +431,7 @@ const awn=(c='')=>`<div class="awning ${c}" aria-hidden="true"></div>`;
 const pick=ids=>ids.map(i=>D.paintings.find(p=>p.id===i)).filter(Boolean);
 
 /* ---------- HOME ---------- */
-const catImgs=k=>[1,2,3].map(i=>`<img class="bg${i===1?' on':''}" src="img/m/cat_${k}${i}.jpg?v=2" alt="" loading="lazy">`).join('')+`<span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>`;
+const catImgs=k=>[1,2,3].map(i=>`<img class="bg${i===1?' on':''}" src="img/m/cat_${k}${i}.jpg?v=3" alt="" loading="lazy">`).join('')+`<span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>`;
 let catT;function catStart(){clearInterval(catT);const cs=[...document.querySelectorAll('.cat')];if(!cs.length||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let t=0;
   catT=setInterval(()=>{if(!document.body.contains(cs[0]))return clearInterval(catT);const c=cs[t%cs.length];const ims=c.querySelectorAll('.bg'),ds=c.querySelectorAll('.dots i');let i=[...ims].findIndex(x=>x.classList.contains('on'));ims[i].classList.remove('on');ds[i].classList.remove('on');i=(i+1)%ims.length;ims[i].classList.add('on');ds[i].classList.add('on');t++},1600)}
 function home(){
@@ -471,7 +471,7 @@ function home(){
     <div class="rail">${nn.map(x=>card('art',x)).join('')}</div>
   </div></section>
 
-  <section class="wband"><img src="img/wband.jpg?v=2" alt="Фотообои «Розовые горы» в гостиной"><div class="over"><div class="wrap"><h2>Целая стена вместо картины</h2><a class="btn lemon" href="#walls">Смотреть обои →</a></div></div></section>
+  <section class="wband"><img src="img/wband.jpg?v=3" alt="Фотообои «Розовые горы» в гостиной"><div class="over"><div class="wrap"><h2>Целая стена вместо картины</h2><a class="btn lemon" href="#walls">Смотреть обои →</a></div></div></section>
 
   <section class="sec"><div class="wrap">
     <div class="sec-head"><div><div class="eyebrow">Тренд сезона</div><h2 style="margin-top:12px">Коты</h2></div><a class="more" href="#paintings-cat">Все коты</a></div>
@@ -520,7 +520,7 @@ function collections(){return `<section class="phead"><div class="wrap"><div><di
 function about(){return `<section class="about-hero"><div class="wrap"><div><div class="eyebrow">Обо мне</div><h1 style="margin-top:14px">Художница и дизайнер, <em>которая любит уют</em></h1>
  <p class="lead">Я digital-художница и при этом пишу настоящие картины: маслом и мастихином, в студии и дома. Из живописи приходят цвет, фактура и настроение, а цифровые инструменты помогают довести каждую идею до принта, который хорошо смотрится на стене.</p>
  <div class="about-stats"><span><b>${D.paintings.length}</b>принтов</span><span><b>5+</b>лет в дизайне</span><span><b>∞</b>любви к дизайну</span></div><p style="margin-top:22px">Есть вопрос или идея для принта? Пишите в Telegram: <a href="https://t.me/KalashnikovaMary" target="_blank" rel="noopener" style="color:var(--coral-text);font-weight:500">@KalashnikovaMary</a></p></div>
- <div class="pic"><div class="frame"><img src="img/about.jpg" alt="Автор принтов λεμόνια"></div><div class="stamp"><small>автор</small>λεμόνια</div></div></div></section>${awn('lemon')}
+ <div class="pic"><div class="frame"><img src="img/about.jpg?v=2" alt="Автор принтов λεμόνια"></div><div class="stamp"><small>автор</small>λεμόνια</div></div></div></section>${awn('lemon')}
  <section class="sec"><div class="wrap"><div class="facts">
   <div class="fact"><span class="ic" aria-hidden="true">01</span><b>Живопись и digital</b><p>Каждый принт начинается с идеи художника: композиции, палитры, настроения. Живые работы и цифровые соединяются в одну серию.</p></div>
   <div class="fact"><span class="ic" aria-hidden="true">02</span><b>Взгляд дизайнера</b><p>Подбираю сюжеты и цвета так, чтобы картины легко вписывались в интерьер и хорошо смотрелись парами и тройками.</p></div>
@@ -534,7 +534,7 @@ function product(kind,x){
   const keys=Object.keys(x.s);let sz=keys.find(k=>x.s[k][0]||x.s[k][1])||keys[0];
   const base=kind==='art'?'paintings':kind==='wall'?'walls':'pillows';const title=kind==='art'?'Картины':kind==='wall'?'Обои':'Подушки';
   const t0=(x.t||[])[0];
-  const G=x.g?Array.from({length:x.g},(_,i)=>`img/${kind==='pillow'?'gp':kind==='wall'?'gw':'g'}/${x.id}-${i+1}.jpg${kind==='pillow'?'?v=3':''}`):null;
+  const G=x.g?Array.from({length:x.g},(_,i)=>`img/${kind==='pillow'?'gp':kind==='wall'?'gw':'g'}/${x.id}-${i+1}.jpg${kind==='pillow'?'?v=3':kind==='wall'?'?v=2':''}`):null;
   const views=kind==='art'?[['flat','Картина'],['wall','На стене'],['close','Крупный план']]:kind==='wall'?[['mural','В комнате'],['close','Крупный план']]:[['pillow','Подушка'],['pfla','Принт']];
   const sim=(kind==='art'?D.paintings.filter(p=>p.id!==x.id&&p.t.includes(t0)):kind==='wall'?D.walls.filter(p=>p.id!==x.id):D.pillows.filter(p=>p.id!==x.id)).slice(0,4);
   const html=`<div class="wrap"><div class="crumbs dark"><a href="#home">Главная</a> / <a href="#${base}">${title}</a>${t0?` / <a href="#${base}-${t0}">${TAGS[t0]}</a>`:''} / ${esc(x.n)}</div>
