@@ -9,7 +9,7 @@
 <meta property="og:title" content="Одобрено котом — декоративная подушка | λεμόνια">
 <meta property="og:description" content="Наволочка 40×40 см с принтом «Одобрено котом». Купить на Ozon или Wildberries.">
 <meta property="og:type" content="product">
-<meta property="og:image" content="https://lemonia-prints.github.io/img/gp/odobreno-kotom-1.jpg">
+<meta property="og:image" content="https://lemonia-prints.github.io/img/gp/odobreno-kotom-1.jpg?v=2">
 <meta property="og:url" content="https://lemonia-prints.github.io/podushki/odobreno-kotom/">
 <link rel="canonical" href="https://lemonia-prints.github.io/podushki/odobreno-kotom/">
 <meta name="theme-color" content="#16130F">
@@ -405,7 +405,7 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1793781957"></script>
+<script src="data.js?v=1793870972"></script>
 <script src="pw.js?v=1793728232"></script>
 <script>
 const D=window.LEMONIA;const PW=window.PWIMG||{};const IM=p=>PW[p]||p;[...D.walls,...D.pillows].forEach(x=>x.img=IM(x.img));
@@ -534,7 +534,7 @@ function product(kind,x){
   const keys=Object.keys(x.s);let sz=keys.find(k=>x.s[k][0]||x.s[k][1])||keys[0];
   const base=kind==='art'?'paintings':kind==='wall'?'walls':'pillows';const title=kind==='art'?'Картины':kind==='wall'?'Обои':'Подушки';
   const t0=(x.t||[])[0];
-  const G=x.g?Array.from({length:x.g},(_,i)=>`img/${kind==='pillow'?'gp':kind==='wall'?'gw':'g'}/${x.id}-${i+1}.jpg`):null;
+  const G=x.g?Array.from({length:x.g},(_,i)=>`img/${kind==='pillow'?'gp':kind==='wall'?'gw':'g'}/${x.id}-${i+1}.jpg${kind==='pillow'?'?v=2':''}`):null;
   const views=kind==='art'?[['flat','Картина'],['wall','На стене'],['close','Крупный план']]:kind==='wall'?[['mural','В комнате'],['close','Крупный план']]:[['pillow','Подушка'],['pfla','Принт']];
   const sim=(kind==='art'?D.paintings.filter(p=>p.id!==x.id&&p.t.includes(t0)):kind==='wall'?D.walls.filter(p=>p.id!==x.id):D.pillows.filter(p=>p.id!==x.id)).slice(0,4);
   const html=`<div class="wrap"><div class="crumbs dark"><a href="#home">Главная</a> / <a href="#${base}">${title}</a>${t0?` / <a href="#${base}-${t0}">${TAGS[t0]}</a>`:''} / ${esc(x.n)}</div>
