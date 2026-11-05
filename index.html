@@ -403,7 +403,7 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1793871756"></script>
+<script src="data.js?v=1793871950"></script>
 <script src="pw.js?v=1793728232"></script>
 <script>
 const D=window.LEMONIA;const PW=window.PWIMG||{};const IM=p=>PW[p]||p;[...D.walls,...D.pillows].forEach(x=>x.img=IM(x.img));
@@ -429,7 +429,7 @@ const awn=(c='')=>`<div class="awning ${c}" aria-hidden="true"></div>`;
 const pick=ids=>ids.map(i=>D.paintings.find(p=>p.id===i)).filter(Boolean);
 
 /* ---------- HOME ---------- */
-const catImgs=k=>[1,2,3].map(i=>`<img class="bg${i===1?' on':''}" src="img/m/cat_${k}${i}.jpg" alt="" loading="lazy">`).join('')+`<span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>`;
+const catImgs=k=>[1,2,3].map(i=>`<img class="bg${i===1?' on':''}" src="img/m/cat_${k}${i}.jpg?v=2" alt="" loading="lazy">`).join('')+`<span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>`;
 let catT;function catStart(){clearInterval(catT);const cs=[...document.querySelectorAll('.cat')];if(!cs.length||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let t=0;
   catT=setInterval(()=>{if(!document.body.contains(cs[0]))return clearInterval(catT);const c=cs[t%cs.length];const ims=c.querySelectorAll('.bg'),ds=c.querySelectorAll('.dots i');let i=[...ims].findIndex(x=>x.classList.contains('on'));ims[i].classList.remove('on');ds[i].classList.remove('on');i=(i+1)%ims.length;ims[i].classList.add('on');ds[i].classList.add('on');t++},1600)}
 function home(){
@@ -469,7 +469,7 @@ function home(){
     <div class="rail">${nn.map(x=>card('art',x)).join('')}</div>
   </div></section>
 
-  <section class="wband"><img src="img/wband.jpg" alt="Фотообои «Розовые горы» в гостиной"><div class="over"><div class="wrap"><h2>Целая стена вместо картины</h2><a class="btn lemon" href="#walls">Смотреть обои →</a></div></div></section>
+  <section class="wband"><img src="img/wband.jpg?v=2" alt="Фотообои «Розовые горы» в гостиной"><div class="over"><div class="wrap"><h2>Целая стена вместо картины</h2><a class="btn lemon" href="#walls">Смотреть обои →</a></div></div></section>
 
   <section class="sec"><div class="wrap">
     <div class="sec-head"><div><div class="eyebrow">Тренд сезона</div><h2 style="margin-top:12px">Коты</h2></div><a class="more" href="#paintings-cat">Все коты</a></div>
