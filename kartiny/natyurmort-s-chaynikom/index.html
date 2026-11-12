@@ -405,11 +405,11 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1793883862"></script>
+<script src="data.js?v=1794492983"></script>
 <script src="pw.js?v=1793728232"></script>
 <script>
 const D=window.LEMONIA;const PW=window.PWIMG||{};const IM=p=>PW[p]||p;[...D.walls,...D.pillows].forEach(x=>x.img=IM(x.img));
-const TAGS={lemon:"Лимоны",sea:"Море",cat:"Коты",flower:"Цветы",food:"Еда",animal:"Звери",girl:"Портреты",land:"Пейзажи",style:"Стиль",abstract:"Абстракция",winter:"Зима"};
+const TAGS={lemon:"Лимоны",sea:"Море",cat:"Коты",flower:"Цветы",food:"Еда",animal:"Звери",girl:"Портреты",land:"Пейзажи",style:"Стиль",abstract:"Абстракция",winter:"Зима",motiv:"Мотиваторы",kids:"Детские"};
 const TAGCOL={lemon:"#FFD12E",sea:"#7FB2FF",cat:"#F6B48F",flower:"#F7C6D9",food:"#F25C3A",animal:"#BFE3B4",girl:"#E3D4FF",land:"#F2D8A7",style:"#F2D0C4",abstract:"#D9E2D0",winter:"#DCE8FF"};
 const WALLC={lemon:"#F4E7B8",sea:"#D7E4F2",cat:"#F1DCCB",flower:"#F3DDE3",food:"#EFE0CC",animal:"#DDE7D4",girl:"#E7E0EF",land:"#ECE0C8",style:"#EFDCD5",abstract:"#E3E6DC",winter:"#E2E8EF"};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -480,7 +480,7 @@ function home(){
 
   ${buyBand()}`;
 }
-function themeList(ids){return `<div class="tlist">${ids.map(t=>{const items=D.paintings.filter(p=>p.t.includes(t));const ims=items.slice(0,3).map(p=>p.img);
+function themeList(ids){ids=ids.filter(t=>D.paintings.some(p=>p.t.includes(t)));return `<div class="tlist">${ids.map(t=>{const items=D.paintings.filter(p=>p.t.includes(t));const ims=items.slice(0,3).map(p=>p.img);
   return `<a class="trow" href="#paintings-${t}" data-imgs="${ims.join(',')}"><span class="nm">${TAGS[t]}</span><span class="ct">${items.length} ${plural(items.length,['картина','картины','картин'])}<span class="ar">→</span></span><span class="mini">${ims.map(i=>`<img src="${i}" alt="" loading="lazy">`).join('')}</span></a>`}).join('')}</div>`}
 function wallCols(){const ps=D.paintings.filter((p,i)=>i%2===0||!hasBuy(p.s)).slice(0,48);const cols=[[],[],[],[],[],[]];ps.forEach((p,i)=>cols[i%6].push(p));
   return cols.map(c=>{const a=c.map(p=>`<a href="#art-${p.id}" tabindex="-1"><img src="${p.img}" alt=""></a>`).join('');return `<div class="colm">${a}${a}</div>`}).join('')}
@@ -600,7 +600,7 @@ function route(keep){
   else{
     const [p,t]=h.split('-');
     if(p==='paintings'){app.innerHTML=catalog('art',TAGS[t]?t:null);navKey='paintings'}
-    else if(p==='walls'){app.innerHTML=catalog('wall',null);navKey='walls'}
+    else if(p==='walls'){app.innerHTML=catalog('wall',TAGS[t]?t:null);navKey='walls'}
     else if(p==='pillows'){app.innerHTML=catalog('pillow',TAGS[t]?t:null);navKey='pillows'}
     else if(p==='collections'){app.innerHTML=collections();navKey='collections'}
     else if(p==='about'){app.innerHTML=about();navKey='about'}
