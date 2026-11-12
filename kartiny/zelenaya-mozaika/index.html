@@ -251,7 +251,7 @@ p{margin:0}
 .track{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .track::-webkit-scrollbar{display:none}
 .track img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start;display:block}
-.car .nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(251,247,240,.88);color:var(--navy);font-size:22px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18);z-index:2}
+.car .nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;border:0;background:rgba(251,247,240,.88);color:var(--navy);font-size:0;line-height:0;display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.18);z-index:2}
 .car .nav.prev{left:12px}.car .nav.next{right:12px}
 .car .nav:disabled{opacity:0;pointer-events:none}
 .car .dots{position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:8px;z-index:2}
@@ -405,10 +405,9 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1794492983"></script>
-<script src="pw.js?v=1793728232"></script>
+<script src="data.js?v=1794495780"></script>
 <script>
-const D=window.LEMONIA;const PW=window.PWIMG||{};const IM=p=>PW[p]||p;[...D.walls,...D.pillows].forEach(x=>x.img=IM(x.img));
+const D=window.LEMONIA;
 const TAGS={lemon:"Лимоны",sea:"Море",cat:"Коты",flower:"Цветы",food:"Еда",animal:"Звери",girl:"Портреты",land:"Пейзажи",style:"Стиль",abstract:"Абстракция",winter:"Зима",motiv:"Мотиваторы",kids:"Детские"};
 const TAGCOL={lemon:"#FFD12E",sea:"#7FB2FF",cat:"#F6B48F",flower:"#F7C6D9",food:"#F25C3A",animal:"#BFE3B4",girl:"#E3D4FF",land:"#F2D8A7",style:"#F2D0C4",abstract:"#D9E2D0",winter:"#DCE8FF"};
 const WALLC={lemon:"#F4E7B8",sea:"#D7E4F2",cat:"#F1DCCB",flower:"#F3DDE3",food:"#EFE0CC",animal:"#DDE7D4",girl:"#E7E0EF",land:"#ECE0C8",style:"#EFDCD5",abstract:"#E3E6DC",winter:"#E2E8EF"};
@@ -426,12 +425,12 @@ const card=(kind,x)=>{const href=`#${kind}-${x.id}`;const soon=!hasBuy(x.s);
   const meta=kind==='art'?`<span>${x.t.map(t=>TAGS[t]).join(' · ')}</span><span>${Object.keys(x.s).join(' / ')} см</span>`
    :kind==='wall'?`<span>${Object.keys(x.s).length} ${plural(Object.keys(x.s).length,['размер','размера','размеров'])}</span><span>высота 2,8 м</span>`
    :`<span>${Object.keys(x.s).join(' / ')}</span><span>40×40 см</span>`;
-  return `<a class="card${cls}" href="${href}"><div class="ph"><img src="${x.img}" alt="${esc(x.n)}" loading="lazy">${soon?'<span class="tagpill">скоро</span>':''}<span class="look">Смотреть</span></div><div class="nm">${esc(x.n)}</div><div class="meta">${meta}</div></a>`};
+  return `<a class="card${cls}" href="${href}"><div class="ph"><img src="${x.th||x.img}" alt="${esc(x.n)}" loading="lazy" decoding="async">${soon?'<span class="tagpill">скоро</span>':''}<span class="look">Смотреть</span></div><div class="nm">${esc(x.n)}</div><div class="meta">${meta}</div></a>`};
 const awn=(c='')=>`<div class="awning ${c}" aria-hidden="true"></div>`;
 const pick=ids=>ids.map(i=>D.paintings.find(p=>p.id===i)).filter(Boolean);
 
 /* ---------- HOME ---------- */
-const catImgs=k=>[1,2,3].map(i=>`<img class="bg${i===1?' on':''}" src="img/m/cat_${k}${i}.jpg?v=3" alt="" loading="lazy">`).join('')+`<span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>`;
+const catImgs=k=>[1,2,3].map(i=>`<img class="bg${i===1?' on':''}" src="img/m/cat_${k}${i}.jpg?v=4" alt="" loading="lazy">`).join('')+`<span class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>`;
 let catT;function catStart(){clearInterval(catT);const cs=[...document.querySelectorAll('.cat')];if(!cs.length||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let t=0;
   catT=setInterval(()=>{if(!document.body.contains(cs[0]))return clearInterval(catT);const c=cs[t%cs.length];const ims=c.querySelectorAll('.bg'),ds=c.querySelectorAll('.dots i');let i=[...ims].findIndex(x=>x.classList.contains('on'));ims[i].classList.remove('on');ds[i].classList.remove('on');i=(i+1)%ims.length;ims[i].classList.add('on');ds[i].classList.add('on');t++},1600)}
 function home(){
@@ -471,7 +470,7 @@ function home(){
     <div class="rail">${nn.map(x=>card('art',x)).join('')}</div>
   </div></section>
 
-  <section class="wband"><img src="img/wband.jpg?v=4" alt="Фотообои «Розовые горы» в гостиной"><div class="over"><div class="wrap"><h2>Целая стена вместо картины</h2><a class="btn lemon" href="#walls">Смотреть обои →</a></div></div></section>
+  <section class="wband"><img src="img/wband.jpg?v=5" loading="lazy" decoding="async" alt="Фотообои «Розовые горы» в гостиной"><div class="over"><div class="wrap"><h2>Целая стена вместо картины</h2><a class="btn lemon" href="#walls">Смотреть обои →</a></div></div></section>
 
   <section class="sec"><div class="wrap">
     <div class="sec-head"><div><div class="eyebrow">Тренд сезона</div><h2 style="margin-top:12px">Коты</h2></div><a class="more" href="#paintings-cat">Все коты</a></div>
@@ -480,21 +479,21 @@ function home(){
 
   ${buyBand()}`;
 }
-function themeList(ids){ids=ids.filter(t=>D.paintings.some(p=>p.t.includes(t)));return `<div class="tlist">${ids.map(t=>{const items=D.paintings.filter(p=>p.t.includes(t));const ims=items.slice(0,3).map(p=>p.img);
+function themeList(ids){ids=ids.filter(t=>D.paintings.some(p=>p.t.includes(t)));return `<div class="tlist">${ids.map(t=>{const items=D.paintings.filter(p=>p.t.includes(t));const ims=items.slice(0,3).map(p=>p.th||p.img);
   return `<a class="trow" href="#paintings-${t}" data-imgs="${ims.join(',')}"><span class="nm">${TAGS[t]}</span><span class="ct">${items.length} ${plural(items.length,['картина','картины','картин'])}<span class="ar">→</span></span><span class="mini">${ims.map(i=>`<img src="${i}" alt="" loading="lazy">`).join('')}</span></a>`}).join('')}</div>`}
-function wallCols(){const ps=D.paintings.filter((p,i)=>i%2===0||!hasBuy(p.s)).slice(0,48);const cols=[[],[],[],[],[],[]];ps.forEach((p,i)=>cols[i%6].push(p));
-  return cols.map(c=>{const a=c.map(p=>`<a href="#art-${p.id}" tabindex="-1"><img src="${p.img}" alt=""></a>`).join('');return `<div class="colm">${a}${a}</div>`}).join('')}
+function wallCols(){const ps=D.paintings.filter((p,i)=>i%2===0||!hasBuy(p.s)).slice(0,30);const cols=[[],[],[],[],[],[]];ps.forEach((p,i)=>cols[i%6].push(p));
+  return cols.map(c=>{const a=c.map(p=>`<a href="#art-${p.id}" tabindex="-1"><img src="${p.th||p.img}" alt="" loading="lazy" decoding="async"></a>`).join('');return `<div class="colm">${a}${a}</div>`}).join('')}
 function buyBand(){const ps=[...D.paintings].sort(()=>Math.random()-.5).slice(0,5);
   return `<section class="buyband"><div class="wrap">
   <div><div class="eyebrow" style="color:var(--lemon)">Где купить</div><h2 style="margin-top:14px">На сайте витрина, покупка на маркетплейсе</h2><p>Выберите принт, откройте его страницу и нажмите «Ozon» или «Wildberries». Оплата, доставка в пункт выдачи и возврат идут через площадку, там же актуальная цена.</p></div>
-  <a class="fan" href="#paintings" aria-label="Смотреть все картины">${ps.map((p,i)=>`<span class="fc" style="--i:${i}"><img src="${p.img}" alt="" loading="lazy"></span>`).join('')}<span class="fan-cta"><b>${D.paintings.length}</b> картин<i>смотреть все →</i></span></a>
+  <a class="fan" href="#paintings" aria-label="Смотреть все картины">${ps.map((p,i)=>`<span class="fc" style="--i:${i}"><img src="${p.th||p.img}" alt="" loading="lazy"></span>`).join('')}<span class="fan-cta"><b>${D.paintings.length}</b> картин<i>смотреть все →</i></span></a>
 </div></section>`}
 let fanT;function fanStart(){clearInterval(fanT);const f=document.querySelector('.fan');if(!f||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let k=0;
   fanT=setInterval(()=>{if(!document.body.contains(f))return clearInterval(fanT);const im=f.querySelectorAll('.fc img')[k%5];const p=D.paintings[Math.floor(Math.random()*D.paintings.length)];
-    const n=new Image();n.onload=()=>{im.classList.add('sw');setTimeout(()=>{im.src=p.img;im.classList.remove('sw')},350)};n.src=p.img;k+=2},1800)}
+    const n=new Image();n.onload=()=>{im.classList.add('sw');setTimeout(()=>{im.src=p.th||p.img;im.classList.remove('sw')},350)};n.src=p.th||p.img;k+=2},1800)}
 
 /* ---------- CATALOG ---------- */
-const state={lim:48};
+const state={lim:24};
 function catalog(kind,tag){
   const all=kind==='art'?D.paintings:kind==='wall'?D.walls:D.pillows;
   const title=kind==='art'?'Картины':kind==='wall'?'Обои':'Подушки';
@@ -540,7 +539,7 @@ function product(kind,x){
   const html=`<div class="wrap"><div class="crumbs dark"><a href="#home">Главная</a> / <a href="#${base}">${title}</a>${t0?` / <a href="#${base}-${t0}">${TAGS[t0]}</a>`:''} / ${esc(x.n)}</div>
   <div class="prod">
     ${G?`<div class="gal"><div class="thumbs${x.h?' hz':''}" id="thumbs">${G.map((g,i)=>`<button type="button" data-v="${i}" aria-label="Фото ${i+1}" aria-current="${i===0}"><img src="${g}" alt="" loading="lazy"></button>`).join('')}</div>
-      <div class="stage car${x.h?' hz':''}"><div class="track" id="track">${G.map((g,i)=>`<img src="${g}" alt="${esc(x.n)}${i?' в интерьере':kind==='pillow'?' — подушка':kind==='wall'?' — фотообои':' — картина на холсте'}" ${i?'loading="lazy"':''}>`).join('')}</div><button type="button" class="nav prev" aria-label="Назад" disabled>‹</button><button type="button" class="nav next" aria-label="Вперёд">›</button><div class="dots">${G.map((g,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div></div>`:
+      <div class="stage car${x.h?' hz':''}"><div class="track" id="track">${G.map((g,i)=>`<img src="${g}" alt="${esc(x.n)}${i?' в интерьере':kind==='pillow'?' — подушка':kind==='wall'?' — фотообои':' — картина на холсте'}" ${i?'loading="lazy"':''}>`).join('')}</div><button type="button" class="nav prev" aria-label="Назад" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><button type="button" class="nav next" aria-label="Вперёд"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button><div class="dots">${G.map((g,i)=>`<i class="${i?'':'on'}"></i>`).join('')}</div></div></div>`:
     `<div class="gal"><div class="thumbs" id="thumbs">${views.map(([v,l],i)=>`<button type="button" data-v="${i}" aria-label="${l}" aria-current="${i===0}"><div class="tv">${viewHTML(kind,x,v,true)}</div></button>`).join('')}</div>
       <div class="stage" id="stage">${viewHTML(kind,x,views[0][0])}<span class="vlabel">${views[0][1]}</span></div></div>`}
     <div class="info">
@@ -593,7 +592,7 @@ const PDIR={art:'kartiny',wall:'oboi',pillow:'podushki'};
 function route(keep){
   const pm=location.pathname.match(/^\/(kartiny|oboi|podushki)\/([^/]+)\/?$/);const PK={kartiny:'art',oboi:'wall',podushki:'pillow'};
   const h=location.hash?location.hash.slice(1):(pm?PK[pm[1]]+'-'+decodeURIComponent(pm[2]):'home');
-  if(!keep)state.lim=48;
+  if(!keep)state.lim=24;
   document.getElementById('hdr').classList.remove('open');
   let navKey='';
   if(byId[h]){const [k,x]=byId[h];product(k,x);navKey=k==='art'?'paintings':k==='wall'?'walls':'pillows';}
@@ -607,7 +606,7 @@ function route(keep){
     else app.innerHTML=home();
     if(location.pathname!=='/'){history.replaceState(null,'','/'+(location.hash||''));document.title=TITLE0}
     const mb=document.getElementById('more');
-    if(mb)mb.onclick=()=>{const y=scrollY;state.lim+=48;route(true);scrollTo(0,y)};
+    if(mb)mb.onclick=()=>{const y=scrollY;state.lim+=24;route(true);scrollTo(0,y)};
   }
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.r===navKey));
   fanStart();catStart();
