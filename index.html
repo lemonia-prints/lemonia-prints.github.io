@@ -403,7 +403,7 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1794495780"></script>
+<script src="data.js?v=1795009152"></script>
 <script>
 const D=window.LEMONIA;
 const TAGS={lemon:"Лимоны",sea:"Море",cat:"Коты",flower:"Цветы",food:"Еда",animal:"Звери",girl:"Портреты",land:"Пейзажи",style:"Стиль",abstract:"Абстракция",winter:"Зима",motiv:"Мотиваторы",kids:"Детские"};
@@ -479,9 +479,9 @@ function home(){
 }
 function themeList(ids){ids=ids.filter(t=>D.paintings.some(p=>p.t.includes(t)));return `<div class="tlist">${ids.map(t=>{const items=D.paintings.filter(p=>p.t.includes(t));const ims=items.slice(0,3).map(p=>p.th||p.img);
   return `<a class="trow" href="#paintings-${t}" data-imgs="${ims.join(',')}"><span class="nm">${TAGS[t]}</span><span class="ct">${items.length} ${plural(items.length,['картина','картины','картин'])}<span class="ar">→</span></span><span class="mini">${ims.map(i=>`<img src="${i}" alt="" loading="lazy">`).join('')}</span></a>`}).join('')}</div>`}
-function wallCols(){const ps=D.paintings.filter((p,i)=>i%2===0||!hasBuy(p.s)).slice(0,30);const cols=[[],[],[],[],[],[]];ps.forEach((p,i)=>cols[i%6].push(p));
+function wallCols(){const by={};D.paintings.filter(p=>hasBuy(p.s)&&!p.t.includes('motiv')).sort(()=>Math.random()-.5).forEach(p=>{const k=p.t[0]||'z';(by[k]=by[k]||[]).push(p)});const ks=Object.keys(by).sort(()=>Math.random()-.5);const ps=[];while(ps.length<30&&ks.some(k=>by[k].length))for(const k of ks){if(by[k].length&&ps.length<30)ps.push(by[k].shift())}const cols=[[],[],[],[],[],[]];ps.forEach((p,i)=>cols[i%6].push(p));
   return cols.map(c=>{const a=c.map(p=>`<a href="#art-${p.id}" tabindex="-1"><img src="${p.th||p.img}" alt="" loading="lazy" decoding="async"></a>`).join('');return `<div class="colm">${a}${a}</div>`}).join('')}
-function buyBand(){const ps=[...D.paintings].sort(()=>Math.random()-.5).slice(0,5);
+function buyBand(){const ps=D.paintings.filter(p=>hasBuy(p.s)&&!p.t.includes('motiv')).sort(()=>Math.random()-.5).slice(0,5);
   return `<section class="buyband"><div class="wrap">
   <div><div class="eyebrow" style="color:var(--lemon)">Где купить</div><h2 style="margin-top:14px">На сайте витрина, покупка на маркетплейсе</h2><p>Выберите принт, откройте его страницу и нажмите «Ozon» или «Wildberries». Оплата, доставка в пункт выдачи и возврат идут через площадку, там же актуальная цена.</p></div>
   <a class="fan" href="#paintings" aria-label="Смотреть все картины">${ps.map((p,i)=>`<span class="fc" style="--i:${i}"><img src="${p.th||p.img}" alt="" loading="lazy"></span>`).join('')}<span class="fan-cta"><b>${D.paintings.length}</b> картин<i>смотреть все →</i></span></a>
