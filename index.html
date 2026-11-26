@@ -309,6 +309,7 @@ p{margin:0}
 .fact b{font-family:var(--f-display);font-size:1.7rem;font-weight:600}
 .fact p{color:var(--ink-2)}
 
+.boosty-sec{padding-block:24px}.boosty{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px;background:var(--paper-2);border-radius:24px;padding:32px 36px}.boosty h3{font-size:1.6rem}.boosty p{margin-top:8px;max-width:56ch;color:var(--ink-2)}
 /* footer */
 footer{background:var(--navy);color:var(--paper)}
 footer .wrap{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:32px;padding-block:60px 36px}
@@ -395,7 +396,7 @@ main > *{animation:pagein .45s ease both}
   <div class="wrap">
     <div>
       <span class="logo"><span>λεμ</span><span class="o">ο<svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21 C3 10 10 3 21 3 C21 14 14 21 3 21 Z" fill="#E9B949"/><path d="M4 20 L17 7" stroke="#2A1F19" stroke-width="1.2" fill="none" stroke-linecap="round"/></svg></span><span>νια</span></span>
-      <p style="margin-top:14px;color:#D9C7B8;max-width:32ch">Авторские принты для дома</p><p style="margin-top:10px"><a href="https://t.me/KalashnikovaMary" target="_blank" rel="noopener" style="color:var(--paper);border-bottom:1px solid rgba(255,255,255,.4)">Telegram: @KalashnikovaMary</a></p>
+      <p style="margin-top:14px;color:#D9C7B8;max-width:32ch">Авторские принты для дома</p><p style="margin-top:10px"><a href="https://t.me/KalashnikovaMary" target="_blank" rel="noopener" style="color:var(--paper);border-bottom:1px solid rgba(255,255,255,.4)">Telegram: @KalashnikovaMary</a></p><p style="margin-top:10px"><a href="https://boosty.to/creatormary" target="_blank" rel="noopener" style="color:var(--paper);border-bottom:1px solid rgba(255,255,255,.4)">Boosty: creatormary</a></p>
     </div>
     <div><h4>Каталог</h4><ul><li><a href="#paintings">Картины</a></li><li><a href="#walls">Обои</a></li><li><a href="#pillows">Подушки</a></li></ul></div>
     <div><h4>Подборки</h4><ul><li><a href="#paintings-lemon">Лимоны</a></li><li><a href="#paintings-sea">Море</a></li><li><a href="#paintings-cat">Коты</a></li><li><a href="#paintings-winter">Зима</a></li></ul></div>
@@ -404,7 +405,7 @@ main > *{animation:pagein .45s ease both}
   </div>
 </footer>
 
-<script src="data.js?v=1795010952"></script>
+<script src="data.js?v=1795700221"></script>
 <script>
 const D=window.LEMONIA;
 const TAGS={lemon:"Лимоны",sea:"Море",cat:"Коты",flower:"Цветы",food:"Еда",animal:"Звери",girl:"Портреты",land:"Пейзажи",style:"Стиль",abstract:"Абстракция",winter:"Зима",motiv:"Мотиваторы",kids:"Детские"};
@@ -523,7 +524,7 @@ function about(){return `<section class="about-hero"><div class="wrap"><div><div
   <div class="fact"><span class="ic" aria-hidden="true">01</span><b>Живопись и digital</b><p>Каждый принт начинается с идеи художника: композиции, палитры, настроения. Живые работы и цифровые соединяются в одну серию.</p></div>
   <div class="fact"><span class="ic" aria-hidden="true">02</span><b>Взгляд дизайнера</b><p>Подбираю сюжеты и цвета так, чтобы картины легко вписывались в интерьер и хорошо смотрелись парами и тройками.</p></div>
   <div class="fact"><span class="ic" aria-hidden="true">03</span><b>Холст и маркетплейсы</b><p>Картины печатают на холсте и натягивают на подрамник. Купить можно на Ozon или Wildberries, доставка и возврат через площадку.</p></div>
- </div></div></section>${buyBand()}`}
+ </div></div></section><section class="sec boosty-sec"><div class="wrap"><div class="boosty"><div><div class="eyebrow">Поддержать</div><h3 style="margin-top:10px">Хотите поддержать мои работы?</h3><p>Если вам нравятся мои картины и принты, можно поддержать меня на Boosty.</p></div><a class="btn navy" href="https://boosty.to/creatormary" target="_blank" rel="noopener">Задонатить мне на Boosty →</a></div></div></section>${buyBand()}`}
 
 /* ---------- PRODUCT ---------- */
 const DESC={lemon:'Солнечный принт для кухни, столовой или светлой гостиной. Красиво смотрится рядом с другими картинами с лимонами.',sea:'Кусочек юга на стене: море, белые домики и тёплый свет. Подходит для спальни, гостиной и коридора.',cat:'Кот, который поселится у вас навсегда и никогда не попросит есть. Подарок для тех, кто любит котов.',flower:'Цветы, которые не вянут. Мягкий принт для спальни, гостиной или прихожей.',food:'Аппетитный принт для кухни или кафе. Делает стену ярче и настроение лучше.',animal:'Характерный герой для гостиной или детской. Принт, на который хочется смотреть.',girl:'Портрет с настроением для спальни или гостиной.',land:'Пейзаж, в который хочется зайти. Спокойный принт для любой комнаты.',winter:'Зимнее настроение для дома: тепло, уют и немного снега.',style:'Принт с характером для гостиной, прихожей или рабочего угла.',abstract:'Спокойная абстракция, которая подстроится под любой интерьер.'};
